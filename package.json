@@ -5,9 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "test",
-    "start": "nodemon server.js"
-  "start": "concurrently \"nodemon server.js\" \"cd ../client && npm start\""
-    }
+    "start": "concurrently \"nodemon server.js\" \"cd ../client && npm start\""
   },
   "repository": {
     "type": "git",
@@ -31,5 +29,3 @@
     "mongoose": "^5.8.12"
   }
 }
-
-
