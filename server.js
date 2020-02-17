@@ -25,3 +25,5 @@ app.use(
 );
 app.use(cors());
 app.use("/cities", require("./routes/cities"));
+
+
