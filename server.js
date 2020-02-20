@@ -25,4 +25,4 @@ app.use(
 );
 app.use(cors());
 app.use("/cities", require("./routes/cities"));
-// app.use("/itineraries", require("./routes/itineraries"));
+app.use("/Itinerary", require("./routes/Itinerary"));

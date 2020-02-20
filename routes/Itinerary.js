@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const cityModel = require("../model/itineraryModel");
+const itineraryModel = require("../model/itineraryModel");
 
-router.get("/test", (req, res) => {
-  res.send({ msg: "Itinerary test route." });
-});
+// router.get("/test", (req, res) => {
+//   res.send({ msg: "Itinerary test route." });
+// });
 
 router.get("/:name", (req, res) => {
   let itineraryRequested = req.params.name;
