@@ -8,15 +8,6 @@ const db = require("./keys").mongoURI;
 
 const mongoose = require("mongoose");
 
-app.listen(port, () => {
-  console.log("Server is running on " + port + "port");
-});
-
-mongoose
-  .connect(db, { useNewUrlParser: true, useCreateIndex: true })
-  .then(() => console.log("Connection to Mongo DB established"))
-  .catch(err => console.log(err));
-
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
@@ -25,4 +16,13 @@ app.use(
 );
 app.use(cors());
 app.use("/cities", require("./routes/cities"));
-app.use("/itinerary", require("./routes/itinerary"));
+app.use("/itineraries", require("./routes/itinerary"));
+
+mongoose
+  .connect(db, { useNewUrlParser: true, useCreateIndex: true })
+  .then(() => console.log("Connection to Mongo DB established"))
+  .catch(err => console.log(err));
+
+app.listen(port, () => {
+  console.log("Server is running on " + port + "port");
+});

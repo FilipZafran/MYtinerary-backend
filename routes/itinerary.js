@@ -2,15 +2,23 @@ const express = require("express");
 const router = express.Router();
 const itineraryModel = require("../model/itineraryModel");
 
-// router.get("/test", (req, res) => {
-//   res.send({ msg: "Itinerary test route." });
-// });
+router.get("/all", (req, res) => {
+  itineraryModel
+    .find()
+    .then(itinerary => {
+      console.log(itinerary);
+      res.send(itinerary);
+    })
+    .catch(err => console.log(err));
+});
 
 router.get("/:name", (req, res) => {
   let itineraryRequested = req.params.name;
+  console.log(itineraryRequested);
   itineraryModel
-    .findOne({ name: itinerary })
+    .find({ key: itineraryRequested })
     .then(itinerary => {
+      console.log(itinerary);
       res.send(itinerary);
     })
     .catch(err => console.log(err));

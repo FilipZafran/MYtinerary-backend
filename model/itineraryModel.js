@@ -9,22 +9,22 @@ const itinerarySchema = new mongoose.Schema({
     required: true
   },
 
-  rating: {
-    type: String,
-    required: true
-  },
-  duration: {
-    type: String,
-    required: true
-  },
-  price: {
-    type: String,
-    required: true
-  },
-  hashtags: {
-    type: String,
-    required: true
-  },
+  // rating: {
+  //   type: String,
+  //   required: true
+  // },
+  // duration: {
+  //   type: String,
+  //   required: true
+  // },
+  // price: {
+  //   type: String,
+  //   required: true
+  // },
+  // hashtags: {
+  //   type: String,
+  //   required: true
+  // },
 
   key: {
     type: String,
