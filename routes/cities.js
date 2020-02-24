@@ -2,10 +2,6 @@ const express = require("express");
 const router = express.Router();
 const cityModel = require("../model/cityModel");
 
-// router.get("/test", (req, res) => {
-//   res.send({ msg: "Cities test route." });
-// });
-
 router.get("/all", (req, res) => {
   cityModel
     .find({})
