@@ -15,14 +15,14 @@ app.use(
   })
 );
 app.use(cors());
-app.use("/cities", require("./routes/cities"));
-app.use("/itineraries", require("./routes/itinerary"));
 
 mongoose
   .connect(db, { useNewUrlParser: true, useCreateIndex: true })
   .then(() => console.log("Connection to Mongo DB established"))
   .catch(err => console.log(err));
-
+app.use("/cities", require("./routes/cities"));
+app.use("/itineraries", require("./routes/itinerary"));
+app.use("/user", require("./routes/signRoute"));
 app.listen(port, () => {
   console.log("Server is running on " + port + "port");
 });
