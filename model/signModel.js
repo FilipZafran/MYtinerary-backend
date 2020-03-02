@@ -17,7 +17,7 @@ const signSchema = new mongoose.Schema({
 
   avatar: {
     type: String,
-    required: true
+    requred: true
   }
 
   // date: {
