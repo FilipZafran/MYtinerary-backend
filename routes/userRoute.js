@@ -3,11 +3,12 @@ const saltRounds = 10;
 
 const express = require("express");
 const router = express.Router();
-const signModel = require("../model/signModel");
-
+const userModel = require("../model/userModel");
+const { check, validationResult } = require("express-validator");
 router.post("/SignUp", async (req, res) => {
   const pwd = req.body.createPass;
-
+  const name = req.body.name;
+  console.log("req.body", req.body);
   check("name", "Username is required").notEmpty();
   check("createPass", "Password is required").notEmpty();
   check("passRepeat", "Passwords do not match").equals(req.body.passRepeat);
@@ -22,9 +23,9 @@ router.post("/SignUp", async (req, res) => {
     return res.status(400).json(errors);
   }
 
-  userModel.findOne({ email }).then(user => {
+  userModel.findOne({ name }).then(user => {
     if (user) {
-      return res.status(400).json({ email: "Email already exists" });
+      return res.status(400).json({ name: "Name already exists" });
     }
   });
 
@@ -33,7 +34,7 @@ router.post("/SignUp", async (req, res) => {
       res.send(err);
     }
     console.log("req.body", req.body);
-    const newUser = new signModel({
+    const newUser = new userModel({
       name: req.body.name,
       createPass: hash,
       email: req.body.email,

@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const signSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true
@@ -31,4 +31,4 @@ const signSchema = new mongoose.Schema({
   // }
 });
 
-module.exports = mongoose.model("user", signSchema);
+module.exports = mongoose.model("user", userSchema);
