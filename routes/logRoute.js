@@ -37,7 +37,7 @@ router.post("/LogIn", async (req, res) => {
   //   return res.status(400).json(errors);
   // }
 
-  // 1. SEND TOKEN AND RECEIVE IN POSTMAN
+  // 1. SEND TOKEN AND RECEIVE IN POSTMAN / token sent
   // 2. THEN LOGIN COMPONENT ACTIONS
 
   userModel
