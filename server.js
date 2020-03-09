@@ -8,6 +8,12 @@ const db = require("./keys").mongoURI;
 
 const mongoose = require("mongoose");
 
+// const passport = require("passport");
+// require("./passport")(passport);
+
+const initializepassport = require("passport");
+require("./passport")(passport);
+
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({

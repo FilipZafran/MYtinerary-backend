@@ -1,3 +1,36 @@
+const LocStrategy = require('passport-local')
+    .Strategy
+
+    const bcrypt = require('bcrypt')
+
+function init(passport) {
+    const authenticateUser = (email, password, done) => {
+        const user = getUserByEmail(email)
+        if (user == null)
+            return  done (null, false, {message: 'no user w that email'})
+
+        try {
+            if (await bcrypt.compare(password, user.password))
+            return done (null, user)
+            {
+                else {
+                return done(null, false, {message: 'pass bad'})
+                }
+    }
+        } catch (e){
+return done(e)
+        }
+        
+}
+
+    passport.use(new LocStrategy({ usernameField: 'email' }), authenticateUser);
+passpoer.serializeUser((user, done) => {  })
+passpoer.deserializeUser((id, done) => {  })
+}
+
+
+
+
 // const JwtStrategy = require("passport-jwt").Strategy;
 // const ExtractJwt = require("passport-jwt").ExtractJwt;
 // const mongoose = require("mongoose");
@@ -6,7 +39,7 @@
 // const passport = require("passport");
 // const GoogleStrategy = require("passport-google-oauth20").Strategy;
 // const HttpError = require("../server/model/http-error");
-
+ 
 // const opts = {};
 // opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 // opts.secretOrKey = key.secretOrKey;
