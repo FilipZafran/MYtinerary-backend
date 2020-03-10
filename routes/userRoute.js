@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
+const jtw = require("jsonwebtoken");
 
 const express = require("express");
 const router = express.Router();
@@ -52,5 +53,19 @@ router.post("/SignUp", async (req, res) => {
       });
   });
 });
+
+// let token;
+// try {
+//   token = jtw.sign({ userId: newUser.id, email: newUser.email }, "secretkey", {
+//     expiresIn: "1h"
+//   });
+// } catch (err) {
+//   const error = new HttpError("Signing up failed", 500);
+//   return next(error);
+// }
+
+// res
+//   .status(201)
+//   .json({ userId: newUser.id, email: newUser.email, token: token });
 
 module.exports = router;

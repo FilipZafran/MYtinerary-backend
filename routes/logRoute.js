@@ -3,6 +3,8 @@ const router = express.Router();
 const userModel = require("../model/userModel");
 
 const key = require("../keys");
+const jwt = require("jsonwebtoken");
+const passport = require("passport");
 
 router.post("/LogIn", async (req, res) => {
   // check("name", "Username is required").notEmpty();
@@ -12,26 +14,6 @@ router.post("/LogIn", async (req, res) => {
   const name = req.body.name;
   const password = req.body.createPass;
   console.log("log in route");
-
-  const payload = {
-    name: user.name,
-    email: user.email,
-    avatar: user.avatar
-  };
-  const options = { expiresIn: 2592000 };
-  jwt.sign(payload, key.secretOrKey, options, (err, token) => {
-    if (err) {
-      res.json({
-        success: false,
-        token: "There was an error"
-      });
-    } else {
-      res.json({
-        success: true,
-        token: token
-      });
-    }
-  });
 
   // if (!errors.isEmpty()) {
   //   return res.status(400).json(errors);
@@ -49,12 +31,31 @@ router.post("/LogIn", async (req, res) => {
         });
       } else {
         if (password === user.createPass) {
-          return res.status(200).json({
-            user,
-            result: "Login succesfull"
+          // return res.status(200).json({
+          //   user,
+          //   result: "Login succesfull"
 
-            // DISPLAY THESE MESSAGES IN COMPONENT (?)
+          const payload = {
+            name: user.name,
+            email: user.email,
+            avatar: user.avatar
+          };
+          const options = { expiresIn: 2592000 };
+          jwt.sign(payload, key.secretOrKey, options, (err, token) => {
+            if (err) {
+              res.json({
+                success: false,
+                token: "There was an error"
+              });
+            } else {
+              res.json({
+                success: true,
+                token: token
+              });
+            }
           });
+
+          // DISPLAY THESE MESSAGES IN COMPONENT (?)
         } else {
           return res.status(200).json({
             result: "Password was incorrect"
@@ -68,5 +69,19 @@ router.post("/LogIn", async (req, res) => {
       res.send(err);
     });
 });
+
+//log route
+router.get(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    userModel
+      .findOne({ _id: req.user.id })
+      .then(user => {
+        res.json(user);
+      })
+      .catch(err => res.status(404).json({ error: "User does not exist!" }));
+  }
+);
 
 module.exports = router;
