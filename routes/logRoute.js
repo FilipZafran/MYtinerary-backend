@@ -5,6 +5,7 @@ const userModel = require("../model/userModel");
 const key = require("../keys");
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
+const bcrypt = require("bcrypt");
 
 router.post("/LogIn", async (req, res) => {
   // check("name", "Username is required").notEmpty();
@@ -30,37 +31,44 @@ router.post("/LogIn", async (req, res) => {
           result: "No user found with the inputed name"
         });
       } else {
-        if (password === user.createPass) {
-          // return res.status(200).json({
-          //   user,
-          //   result: "Login succesfull"
+        // check if password i correctly called
+        // return res.status(200).json({
+        //   user,
+        //   result: "Login succesfull"
 
-          const payload = {
-            name: user.name,
-            email: user.email,
-            avatar: user.avatar
-          };
-          const options = { expiresIn: 2592000 };
-          jwt.sign(payload, key.secretOrKey, options, (err, token) => {
-            if (err) {
-              res.json({
-                success: false,
-                token: "There was an error"
-              });
-            } else {
-              res.json({
-                success: true,
-                token: token
-              });
-            }
-          });
+        bcrypt.compare(password, user.createPass, function(err, result) {
+          if (result) {
+            const payload = {
+              name: user.name,
+              email: user.email,
+              avatar: user.avatar
+            };
 
-          // DISPLAY THESE MESSAGES IN COMPONENT (?)
-        } else {
-          return res.status(200).json({
-            result: "Password was incorrect"
-          });
-        }
+            console.log(payload);
+
+            const options = { expiresIn: 2592000 };
+            jwt.sign(payload, key.secretOrKey, options, (err, token) => {
+              if (err) {
+                res.json({
+                  success: false,
+                  token: "There was an error"
+                });
+              } else {
+                res.json({
+                  success: true,
+                  token: token
+                });
+              }
+            });
+          }
+        });
+
+        // DISPLAY THESE MESSAGES IN COMPONENT (?)
+        //  else {
+        //   return res.status(200).json({
+        //     result: "Password was incorrect"
+        //   });
+        // }
       }
     })
 
