@@ -14,13 +14,12 @@ router.post("/LogIn", async (req, res) => {
   // var errors = validationResult(req);
   const name = req.body.name;
   const password = req.body.createPass;
-  console.log("log in route");
+  console.log("log in route", req.body);
 
   // if (!errors.isEmpty()) {
   //   return res.status(400).json(errors);
   // }
 
-  // 1. SEND TOKEN AND RECEIVE IN POSTMAN / token sent
   // 2. THEN LOGIN COMPONENT ACTIONS
 
   userModel
