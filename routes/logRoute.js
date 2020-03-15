@@ -40,7 +40,8 @@ router.post("/LogIn", async (req, res) => {
             const payload = {
               name: user.name,
               email: user.email,
-              avatar: user.avatar
+              avatar: user.avatar,
+              favouriteItineraries: user.favouriteItineraries
             };
 
             console.log(payload);

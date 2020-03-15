@@ -68,4 +68,17 @@ router.post("/SignUp", async (req, res) => {
 //   .status(201)
 //   .json({ userId: newUser.id, email: newUser.email, token: token });
 
+router.get(
+  "/user-data",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    userModel
+      .findOne({ _id: req.user.id })
+      .then(user => {
+        res.json(user);
+      })
+      .catch(err => res.status(404).json({ error: "User does not exist!" }));
+  }
+);
+
 module.exports = router;

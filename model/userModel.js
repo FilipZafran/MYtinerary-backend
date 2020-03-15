@@ -18,6 +18,10 @@ const userSchema = new mongoose.Schema({
   avatar: {
     type: String,
     requred: true
+  },
+
+  favouriteItineraries: {
+    type: Array
   }
 
   // date: {
