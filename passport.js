@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const User = require("../server/model/userModel");
 const key = require("../server/keys");
 const passport = require("passport");
-
+// passport and mongoose in grey ?
 const opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = key.secretOrKey;
